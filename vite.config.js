@@ -20,9 +20,13 @@ export default defineConfig({
             registerType: 'prompt',
             injectRegister: null,
             // El Service Worker debe quedar en la raíz de public: desde /build/
-            // su alcance no cubriría las páginas de la app.
+            // su alcance no cubriría las páginas de la app. Laravel fija el base
+            // de Vite en /build/, y el plugin lo usa tanto para la URL de registro
+            // como para el alcance, así que aquí lo forzamos a la raíz.
             outDir: 'public',
-            buildBase: '/build/',
+            base: '/',
+            buildBase: '/',
+            scope: '/',
             filename: 'sw.js',
             manifestFilename: 'manifest.webmanifest',
             manifest: {
